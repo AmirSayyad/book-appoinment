@@ -1,0 +1,59 @@
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
+}
+
+.container {
+  width: 80%;
+  margin: 20px auto;
+  padding: 20px
+}
+
+ul.nav.sub-nav.right {
+  list-style: none;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  margin: 0;
+  width: 40%;
+  float: right;
+}
+
+.row {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
+
+.table{
+  border-bottom: 1px solid #eee;
+}
+
+.row.table.head {
+  font-weight: 700;
+}
+
+button.btn {
+  padding: 5px;
+  font-size: 16px;
+  margin: 0 10px;
+  border-color: transparent;
+}
+
+button.btn {
+  cursor: pointer;
+}
+
+.btn.btn-accept {
+  background: orange;
+}
+
+.btn.btn-reject {
+  background: orangered;
+}

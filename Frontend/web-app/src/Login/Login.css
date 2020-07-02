@@ -1,0 +1,40 @@
+form {
+    display: flex;
+    justify-content: space-around;
+    flex-direction: column;
+}
+
+.col {
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+}
+
+.col input {
+    width: 50%;
+    border-radius: 2px;
+    border: 1px solid #eee;
+    padding: 18px;
+    margin: 10px;
+}
+
+.col button {
+    width: 53%;
+    border-radius: 6px;
+    padding: 18px;
+    margin: 10px;
+    border: 0;
+    background-color: #0a6583ee;
+    color: #fff;
+    font-size: 20px;
+    cursor: pointer;
+}
+
+.alert.alert-danger {
+    background: #ffdbdb;
+    padding: 10px;
+    color: red;
+    width: 50%;
+    text-align: center;
+    border-radius: 8px;
+}
