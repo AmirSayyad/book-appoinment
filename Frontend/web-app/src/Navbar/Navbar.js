@@ -16,6 +16,7 @@ class NavBar extends React.Component {
       <ul className="nav sub-nav right">
         <li><Link className="" to="/defineSlot">Set Slot</Link></li>
         <li><Link className="" to="/">Appoinments</Link></li>
+        <li><a onClick={() => { this.props.logout()}}>Logout</a></li>
       </ul>
     )
 

@@ -181,6 +181,17 @@ app.post('/bookslots', authMiddleWare, (req, res) => {
     })
 })
 
+app.post('/deletelots', authMiddleWare, (req, res) => {
+
+    slotsModel.deleteMany({ seller_id: req.body.seller_id }, (err) => {
+        if (err) {
+            return res.status(400).json({ 'error': 'error' })
+        } else {
+            return res.status(200).json({ 'message': 'slots Deleted' })
+        }
+    })
+})
+
 
 app.listen(PORT, console.log(`Server running on ${PORT}`))
 

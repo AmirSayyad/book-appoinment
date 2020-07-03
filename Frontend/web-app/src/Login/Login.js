@@ -38,6 +38,7 @@ class Login extends Component {
             error: responseJson.error,
             loading: false
           })
+          return false;
         }
         console.log(responseJson);
         localStorage.setItem('user', JSON.stringify(responseJson.user));

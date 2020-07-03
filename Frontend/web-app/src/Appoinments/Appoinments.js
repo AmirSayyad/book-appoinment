@@ -79,8 +79,6 @@ class Appoinments extends Component {
 
   render() {
     const { appoinments } = this.state;
-    if (appoinments === null) return <p>Loading ...</p>;
-
     return (
       <div className="container">
         <div className="row table head">
@@ -92,7 +90,7 @@ class Appoinments extends Component {
           <p>status</p>
           <p>Action</p>
         </div>
-        {appoinments.map((item, index) => (
+        {appoinments.length > 0 ? appoinments.map((item, index) => (
           <div className={'row table data ' + (item.booking_status == "pending" ? 'pending' : '')} key="{index}">
             <p>{item.buyer_name}</p>
             <p>{item.buyer_email}</p>
@@ -121,7 +119,10 @@ class Appoinments extends Component {
               </button>
             </p>
           </div>
-        ))}
+        )) :
+        <h2>No Data Found</h2>
+        }
+        
       </div>
     );
   }

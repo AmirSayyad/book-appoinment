@@ -21,7 +21,6 @@ class App extends React.Component {
     this.setState({
       user: null
     })
-    this.props.history.replace('/');
   }
 
   updateUser = () => {
