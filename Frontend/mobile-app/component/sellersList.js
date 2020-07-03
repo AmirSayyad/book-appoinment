@@ -2,22 +2,16 @@ import React, { Component } from 'react';
 import { Text, Image, Alert, View, Button, StyleSheet, ScrollView, TextInput, FlatList } from 'react-native';
 import moment from 'moment';
 import { ButtonN, Card, CardSection, ColSection } from './common';
-const URL = 'http://192.168.203.65:5000';
+const URL = 'https://stark-escarpment-52071.herokuapp.com';
 
 class SellersList extends Component {
     sellersData = []
     constructor(props) {
         super(props);
         this.state = {
-            token: '',
             sellers: [],
-            minD: null,
-            maxD: null,
-            slot: '',
             disabled: true,
             selectedDate: null,
-            dateText: '',
-            apDis: false,
             value: 'Search seller'
         };
     }
@@ -71,7 +65,6 @@ class SellersList extends Component {
                     data={this.state.sellers}
                     keyExtractor={item => item._id}
                     renderItem={({ item }) => (
-                        // {this.state.sellers.map((item) => (
                         <Card key={item._id} >
                             <View style={styles.col}>
                                 <Image style={styles.userImage} source={{ uri: `https://bootdey.com/img/Content/avatar/avatar7.png` }} />

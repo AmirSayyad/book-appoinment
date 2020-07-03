@@ -2,7 +2,7 @@ import React from 'react';
 import { StyleSheet, Text, View, Button, ScrollView, Image, Alert } from 'react-native';
 import { ButtonN, CardSection, Input } from './common';
 import moment from 'moment';
-const URL = 'http://192.168.203.65:5000';
+const URL = 'https://stark-escarpment-52071.herokuapp.com';
 
 export default class Book extends React.Component {
   constructor(props) {
@@ -184,7 +184,6 @@ export default class Book extends React.Component {
         </CardSection>
 
         <ScrollView horizontal={true} style={styles.container}>
-          {/* slots.forEach((a) => console.log(Object.keys(a)[0])) */}
           {this.state.data.map((item, index) => (
             <View key={index}>
               <Text

@@ -20,7 +20,7 @@ class Login extends Component {
     let userName = this.userName.current.value;
     let password = this.password.current.value;
     console.log(this.userName)
-    const BaseUri = 'http://localhost:5000/login';
+    const BaseUri = 'https://stark-escarpment-52071.herokuapp.com/login';
     const uri = BaseUri;
     this.setState({loading: true});
     fetch(uri, {

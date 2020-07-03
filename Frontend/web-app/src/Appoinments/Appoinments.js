@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { Link, withRouter } from "react-router-dom";
 import moment from "moment"
 import "./Appoinments.css";
-const BaseUri = 'http://localhost:5000/';
+const BaseUri = 'https://stark-escarpment-52071.herokuapp.com/';
 class Appoinments extends Component {
   constructor(props) {
     super(props);
