@@ -136,11 +136,6 @@ const styles = StyleSheet.create({
     flexDirection: 'column',
     justifyContent: 'center',
   },
-  welcome: {
-    fontSize: 14,
-    textAlign: 'center',
-    margin: 10,
-  },
   smallFont: {
     fontSize: 16,
     textAlign: 'center',

@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
 import { View } from 'react-native';
-import Ls from 'react-native-local-storage';
-import SellersList from './component/sellersList';
 import { Header } from './component/common/header';
+import SellersList from './component/sellersList';
 import Book from './component/book';
 
 
@@ -13,7 +12,6 @@ export default class App extends Component<Props> {
     super();
     this.state = { book: false };
     this.handleClick = this.handleClick.bind(this);
-    //this.roleClick = this.roleClick.bind(this);
   }
 
   handleClick(book, item) {

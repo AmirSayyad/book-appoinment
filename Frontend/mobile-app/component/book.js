@@ -1,6 +1,14 @@
 import React from 'react';
-import { StyleSheet, Text, View, Button, ScrollView, Image, Alert } from 'react-native';
-import { ButtonN, CardSection, Input } from './common';
+import {
+  StyleSheet,
+  Text,
+  View,
+  Button,
+  ScrollView,
+  Image,
+  Alert,
+} from 'react-native';
+import {ButtonN, CardSection, Input} from './common';
 import moment from 'moment';
 const URL = 'https://stark-escarpment-52071.herokuapp.com';
 
@@ -19,24 +27,25 @@ export default class Book extends React.Component {
 
   componentDidMount() {
     const uri = URL.concat('/slots/').concat(this.state.seller._id);
-    console.log(uri)
+    console.log(uri);
     fetch(uri, {
       method: 'GET',
       mode: 'cors',
       headers: {
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
       },
-    }).then((response) => response.json())
-      .then((responseJson) => {
+    })
+      .then(response => response.json())
+      .then(responseJson => {
         if (responseJson) {
           let dates = this.formattedDates(responseJson.slots);
-          this.setState({ data: dates })
+          this.setState({data: dates});
         } else {
           Alert.alert('No available time slots found for this seller');
         }
       })
-      .catch((error) => {
-        console.log(error)
+      .catch(error => {
+        console.log(error);
         Alert.alert('Oops something went wrong!');
       })
       .done();
@@ -53,8 +62,8 @@ export default class Book extends React.Component {
       let eDateLT = edate.format('LT');
       let i = slotsArray.findIndex(item => item.availableDate === sDateL);
       if (i === -1) {
-        if ((sdate.diff(moment(), 'days') >= 0)) {
-          let a = { availableDate: '', slots: [] };
+        if (sdate.diff(moment(), 'days') >= 0) {
+          let a = {availableDate: '', slots: []};
           a.availableDate = sDateL;
           let time = `${sDateLT} ${eDateLT}`;
           a.slots.push(time);
@@ -89,8 +98,8 @@ export default class Book extends React.Component {
   }
 
   bookAppoinment() {
-    if(!this.state.name && !this.state.email && !this.state.phone){
-      Alert.alert('Error','Please enter your name, email and phone!');
+    if (!this.state.name && !this.state.email && !this.state.phone) {
+      Alert.alert('Error', 'Please enter your name, email and phone!');
       return false;
     }
     const uri = URL.concat('/booking');
@@ -101,31 +110,35 @@ export default class Book extends React.Component {
       seller_id: this.state.seller._id,
       seller_name: this.state.seller.name,
       date: new Date(this.state.bookingDate),
-      time_slot: this.state.bookingTime
-    }
-    console.log(body)
+      time_slot: this.state.bookingTime,
+    };
+    console.log(body);
     fetch(uri, {
       method: 'POST',
       mode: 'cors',
       headers: {
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
       },
-      body: JSON.stringify(body)
-    }).then((response) => response.json())
-      .then((responseJson) => {
-        Alert.alert('Sucess','Appoinment booked successfully you will get notification!');
+      body: JSON.stringify(body),
+    })
+      .then(response => response.json())
+      .then(responseJson => {
+        Alert.alert(
+          'Sucess',
+          'Appoinment booked successfully you will get notification!',
+        );
         this.setState({
-          disabled: true
-        })
+          disabled: true,
+        });
       })
-      .catch((error) => {
-        Alert.alert('Error','Oops something went erong!');
+      .catch(error => {
+        Alert.alert('Error', 'Oops something went erong!');
       })
       .done();
   }
 
   goBack() {
-    this.props.setView(false)
+    this.props.setView(false);
   }
 
   render() {
@@ -133,13 +146,19 @@ export default class Book extends React.Component {
       <ScrollView>
         <CardSection>
           <View style={styles.topHeader}>
-            <Text style={styles.goBack} onPress={() => { this.goBack(); }}>Go Back</Text>
+            <Text
+              style={styles.goBack}
+              onPress={() => {
+                this.goBack();
+              }}>
+              Go Back
+            </Text>
           </View>
         </CardSection>
         <CardSection>
           <Image
             style={styles.userImage}
-            source={{ uri: `https://bootdey.com/img/Content/avatar/avatar7.png` }}
+            source={{uri: `https://bootdey.com/img/Content/avatar/avatar7.png`}}
           />
           <Text style={styles.boldFont}> {this.state.seller.name} </Text>
         </CardSection>
@@ -147,16 +166,14 @@ export default class Book extends React.Component {
           <Text style={styles.divider} />
         </CardSection>
 
-        <Text style={styles.boldFont}>
-          Enter your details
-        </Text>
+        <Text style={styles.boldFont}>Enter your details</Text>
         <CardSection>
           <Input
             placeholder="Enter your name"
             placeholder="name"
             label="Name"
             value={this.state.name}
-            onChangeText={name => this.setState({ name })}
+            onChangeText={name => this.setState({name})}
           />
         </CardSection>
         <CardSection>
@@ -164,7 +181,7 @@ export default class Book extends React.Component {
             placeholder="Enter your email"
             label="Email"
             value={this.state.email}
-            onChangeText={email => this.setState({ email })}
+            onChangeText={email => this.setState({email})}
           />
         </CardSection>
         <CardSection>
@@ -172,13 +189,11 @@ export default class Book extends React.Component {
             placeholder="Enter your phone number"
             label="Phone"
             value={this.state.phone}
-            onChangeText={phone => this.setState({ phone })}
+            onChangeText={phone => this.setState({phone})}
           />
         </CardSection>
 
-        <Text style={styles.boldFont}>
-          Select date and time of your visit
-        </Text>
+        <Text style={styles.boldFont}>Select date and time of your visit</Text>
         <CardSection>
           <Text style={styles.divider} />
         </CardSection>
@@ -187,10 +202,14 @@ export default class Book extends React.Component {
           {this.state.data.map((item, index) => (
             <View key={index}>
               <Text
-                style={this.state.selectedDate !== index? styles.itemList : styles.selectedItemList}
+                style={
+                  this.state.selectedDate !== index
+                    ? styles.itemList
+                    : styles.selectedItemList
+                }
                 onPress={() => {
                   this.showSlotDate(item);
-                  this.setState({selectedDate: index, selectedTime: null})
+                  this.setState({selectedDate: index, selectedTime: null});
                 }}>
                 {this.getFormattedDate(item.availableDate)}
               </Text>
@@ -205,10 +224,14 @@ export default class Book extends React.Component {
           {this.state.slotsTime.map((item, index) => (
             <Text
               key={index}
-              style={this.state.selectedTime !== index ? styles.slotTimeItem : styles.slotSelectedTimeItem}
+              style={
+                this.state.selectedTime !== index
+                  ? styles.slotTimeItem
+                  : styles.slotSelectedTimeItem
+              }
               onPress={() => {
                 this.showSlotTime(item);
-                this.setState({selectedTime: index})
+                this.setState({selectedTime: index});
               }}>
               {item}
             </Text>
@@ -242,8 +265,8 @@ const styles = StyleSheet.create({
   },
   goBack: {
     fontSize: 14,
-    fontWeight: "bold",
-    padding: 14
+    fontWeight: 'bold',
+    padding: 14,
   },
   itemList: {
     textAlignVertical: 'center',
@@ -256,7 +279,7 @@ const styles = StyleSheet.create({
     color: '#003995',
     backgroundColor: '#FFF',
   },
-  selectedItemList:{
+  selectedItemList: {
     textAlignVertical: 'center',
     borderWidth: 1,
     borderRadius: 4,
@@ -284,7 +307,7 @@ const styles = StyleSheet.create({
     padding: 10,
     fontSize: 16,
   },
-  slotSelectedTimeItem:{
+  slotSelectedTimeItem: {
     borderWidth: 1,
     borderRadius: 4,
     borderColor: '#DCDCDC',
@@ -293,16 +316,6 @@ const styles = StyleSheet.create({
     margin: 10,
     padding: 10,
     fontSize: 16,
-  },
-  welcome: {
-    fontSize: 14,
-    textAlign: 'center',
-    margin: 10,
-  },
-  smallFont: {
-    fontSize: 16,
-    textAlign: 'center',
-    margin: 10,
   },
   boldFont: {
     fontSize: 24,
@@ -329,14 +342,5 @@ const styles = StyleSheet.create({
     borderColor: '#EEE',
     borderWidth: 1,
     width: '100%',
-  },
-  searchBar: {
-    height: 60,
-    borderColor: '#A9C7EC',
-    borderWidth: 1,
-    borderRadius: 30,
-    margin: 5,
-    padding: 5,
-    fontSize: 15,
   },
 });
