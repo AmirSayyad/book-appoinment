@@ -9,6 +9,7 @@ import {
   ScrollView,
   TextInput,
   FlatList,
+  ActivityIndicator
 } from 'react-native';
 import moment from 'moment';
 import {ButtonN, Card, CardSection, ColSection} from './common';
@@ -23,6 +24,7 @@ class SellersList extends Component {
       disabled: true,
       selectedDate: null,
       value: 'Search seller',
+      loading: true
     };
   }
 
@@ -38,10 +40,10 @@ class SellersList extends Component {
       .then(response => response.json())
       .then(responseJson => {
         this.sellersData = responseJson;
-        this.setState({sellers: responseJson});
+        this.setState({sellers: responseJson, loading: false});
       })
       .catch(error => {
-        console.log(error);
+        this.setState({loading: false});
         Alert.alert('No data or Error might occured', JSON.stringify(error));
       })
       .done();
@@ -72,6 +74,7 @@ class SellersList extends Component {
             placeholder="Search Sellers.."
           />
         </View>
+        {this.state.loading && <ActivityIndicator size="large" color="#003995" />}
         <FlatList
           data={this.state.sellers}
           keyExtractor={item => item._id}

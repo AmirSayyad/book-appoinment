@@ -7,6 +7,7 @@ import {
   ScrollView,
   Image,
   Alert,
+  ActivityIndicator,
 } from 'react-native';
 import {ButtonN, CardSection, Input} from './common';
 import moment from 'moment';
@@ -22,6 +23,7 @@ export default class Book extends React.Component {
       disabled: true,
       selectedDate: null,
       selectedTime: null,
+      loading: true,
     };
   }
 
@@ -39,8 +41,9 @@ export default class Book extends React.Component {
       .then(responseJson => {
         if (responseJson) {
           let dates = this.formattedDates(responseJson.slots);
-          this.setState({data: dates});
+          this.setState({data: dates, loading: false});
         } else {
+          this.setState({loading: false});
           Alert.alert('No available time slots found for this seller');
         }
       })
@@ -114,7 +117,7 @@ export default class Book extends React.Component {
       date: new Date(this.state.bookingDate),
       time_slot: this.state.bookingTime,
     };
-    console.log(body);
+    
     fetch(uri, {
       method: 'POST',
       mode: 'cors',
@@ -199,7 +202,9 @@ export default class Book extends React.Component {
         <CardSection>
           <Text style={styles.divider} />
         </CardSection>
-
+        {this.state.loading && (
+          <ActivityIndicator size="large" color="#003995" />
+        )}
         <ScrollView horizontal={true} style={styles.container}>
           {this.state.data.map((item, index) => (
             <View key={index}>

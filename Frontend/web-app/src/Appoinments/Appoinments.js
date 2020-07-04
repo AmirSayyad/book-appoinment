@@ -8,6 +8,7 @@ class Appoinments extends Component {
     super(props);
     this.state = {
       appoinments: [],
+      loading: true
     };
   }
 
@@ -23,7 +24,7 @@ class Appoinments extends Component {
       },
     }).then((response) => response.json())
       .then((responseJson) => {
-        this.setState({appoinments: responseJson});
+        this.setState({appoinments: responseJson, loading: false});
       })
       .catch((error) => {
         alert('Error accepting booking');
@@ -43,7 +44,7 @@ class Appoinments extends Component {
     }).then((response) => response.json())
       .then((responseJson) => {
         const data = this.state.appoinments;
-        data[index].booking_status = "accepted";
+        data.splice(index, 1)
         this.setState({
           appoinments: data,
         });
@@ -66,7 +67,7 @@ class Appoinments extends Component {
     }).then((response) => response.json())
       .then((responseJson) => {
         const data = this.state.appoinments;
-        data[index].booking_status = "rejected";
+        data.splice(index, 1)
         this.setState({
           appoinments: data,
         });
@@ -79,6 +80,7 @@ class Appoinments extends Component {
 
   render() {
     const { appoinments } = this.state;
+    if(this.state.loading) return (<div className="container"><h3>Loding...</h3></div>)
     return (
       <div className="container">
         <div className="row table head">
