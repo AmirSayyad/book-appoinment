@@ -161,7 +161,7 @@ app.get('/bookings/:seller_id', authMiddleWare, (req, res) => {
 app.get('/slots/:seller_id', authMiddleWare, (req, res) => {
     slotsModel.findOne({
         'seller_id': req.params.seller_id,
-    }, {}, { sort: { 'created_at': -1 } }, function (err, slots) {
+    }, null, { sort: { '_id': -1 } }, function (err, slots) {
         return res.status(200).json(slots)
     })
 })

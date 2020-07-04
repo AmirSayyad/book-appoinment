@@ -62,7 +62,7 @@ export default class Book extends React.Component {
       let eDateLT = edate.format('LT');
       let i = slotsArray.findIndex(item => item.availableDate === sDateL);
       if (i === -1) {
-        if (sdate.diff(moment(), 'days') >= 0) {
+        if (moment(sdate).isAfter(moment(), 'time')) {
           let a = {availableDate: '', slots: []};
           a.availableDate = sDateL;
           let time = `${sDateLT} ${eDateLT}`;
@@ -70,8 +70,10 @@ export default class Book extends React.Component {
           slotsArray.push(a);
         }
       } else {
-        let time = `${sDateLT} ${eDateLT}`;
-        slotsArray[i].slots.push(time);
+        if (moment(sdate).isAfter(moment(), 'time')) {
+          let time = `${sDateLT} ${eDateLT}`;
+          slotsArray[i].slots.push(time);
+        }
       }
     });
     return slotsArray;
